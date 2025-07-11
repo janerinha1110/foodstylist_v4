@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Blog Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Jacques+Francois:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --spacing-base: 0px;
+      --spacing-sm: 12px;
+      --spacing-lg: 20px;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #faf7f2;
+      min-height: 100vh;
+      padding: var(--spacing-base);
+      box-sizing: border-box;
+    }
+    
+    /* Profile Icon */
+    .profile-icon {
+      position: absolute;
+      top: var(--spacing-base);
+      right: var(--spacing-base);
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .profile-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+    
+
+    
+    .profile-icon-img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    
+    /* Profile Modal */
+    .profile-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .profile-modal.active {
+      display: flex;
+    }
+    
+    .profile-card {
+      background: #faf7f2;
+      padding: 40px;
+      max-width: 250px;
+      width: 100%;
+      height: 350px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      font-family: 'Jacques Francois', serif;
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 30px;
+    }
+    
+    .profile-avatar {
+      width: 50px;
+      height: 50px;
+      background: #8b5cf6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      margin-right: 15px;
+    }
+    
+    .profile-icon-small {
+      width: 35px;
+      height: 35px;
+      fill: #2c3e50;
+    }
+    
+    .profile-content {
+      text-align: left;
+      line-height: 100%;
+      color: #34495e;
+      font-size: 12px;
+      font-family: 'Jacques Francois', serif;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0%;
+    }
+    
+    .profile-content h2 {
+      font-size: 20px;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-family: 'Jacques Francois', serif;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 100%;
+      letter-spacing: 0%;
+    }
+    
+
+    
+
+    
+    .gallery-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    .container {
+      display: grid;
+      gap: var(--spacing-base);
+      width: 100%;
+      
+      /* Ensure minimum 3 columns with better responsive design */
+      grid-template-columns: repeat(auto-fit, minmax(min(250px, calc(100% / 3 - calc(var(--spacing-base) * 2 / 3))), 1fr));
+    }
+    
+    /* Responsive breakpoints for better control */
+    @media (max-width: 480px) {
+      .gallery-wrapper {
+        padding: 0;
+      }
+      .container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-base);
+      }
+      body {
+        padding: var(--spacing-base);
+      }
+      .profile-icon {
+        width: 50px;
+        height: 50px;
+        top: var(--spacing-base);
+        right: var(--spacing-base);
+      }
+      .profile-icon-img {
+        width: 50px;
+        height: 50px;
+      }
+      .profile-card {
+        width: 230px;
+        max-width: 230px;
+        height: 250px;
+        padding: 20px 15px;
+      }
+      .profile-content {
+        font-size: 12px;
+        font-family: 'Jacques Francois', serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+      .profile-content h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        font-family: 'Jacques Francois', serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+      .profile-icon-small {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    
+    @media (min-width: 481px) and (max-width: 768px) {
+      .container {
+        grid-template-columns: repeat(auto-fit, minmax(min(200px, calc(100% / 3 - calc(var(--spacing-base) * 2 / 3))), 1fr));
+        gap: var(--spacing-base);
+      }
+      .profile-icon {
+        width: 50px;
+        height: 50px;
+        top: var(--spacing-base);
+        right: var(--spacing-base);
+      }
+      .profile-icon-img {
+        width: 50px;
+        height: 50px;
+      }
+      .profile-card {
+        max-width: 320px;
+        width: 85%;
+        height: auto;
+        min-height: 250px;
+        padding: 30px 20px;
+      }
+      .profile-content {
+        font-size: 12px;
+        font-family: 'Jacques Francois', serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+      .profile-content h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+        font-family: 'Jacques Francois', serif;
+        font-weight: 400;
+        font-style: normal;
+        line-height: 100%;
+        letter-spacing: 0%;
+      }
+      .profile-icon-small {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .container {
+        grid-template-columns: repeat(auto-fit, minmax(min(220px, calc(100% / 3 - calc(var(--spacing-base) * 2 / 3))), 1fr));
+        gap: var(--spacing-base);
+      }
+      .profile-icon {
+        width: 55px;
+        height: 55px;
+        top: var(--spacing-base);
+        right: var(--spacing-base);
+      }
+      .profile-icon-img {
+        width: 55px;
+        height: 55px;
+      }
+    }
+    
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      .container {
+        grid-template-columns: repeat(auto-fit, minmax(min(240px, calc(100% / 3 - calc(var(--spacing-base) * 2 / 3))), 1fr));
+        gap: var(--spacing-base);
+      }
+      .profile-icon {
+        width: 60px;
+        height: 60px;
+        top: var(--spacing-base);
+        right: var(--spacing-base);
+      }
+      .profile-icon-img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    
+    @media (min-width: 1441px) {
+      .container {
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, calc(100% / 3 - calc(var(--spacing-base) * 2 / 3))), 1fr));
+        gap: var(--spacing-base);
+      }
+      .profile-icon {
+        width: 60px;
+        height: 60px;
+        top: var(--spacing-base);
+        right: var(--spacing-base);
+      }
+      .profile-icon-img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    
+    .img-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1/1;
+      cursor: pointer;
+      perspective: 1000px;
+      /* Ensure no overflow */
+      overflow: visible;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .img-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    .img-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .img-card.flipped .img-inner {
+      transform: rotateY(180deg);
+    }
+    .img-front, .img-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      /* Prevent content from being cut off */
+      box-sizing: border-box;
+      transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .img-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+    
+    .img-front img.loaded {
+      opacity: 1;
+    }
+    
+    .img-card:hover .img-front img {
+      transform: scale(1.05);
+    }
+    .img-back {
+      background: #fffbe6;
+      color: #b85c38;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1em;
+      padding: var(--spacing-base);
+      transform: rotateY(180deg);
+      text-align: center;
+      box-sizing: border-box;
+      /* Ensure text doesn't overflow */
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-weight: 500;
+      line-height: 1.4;
+      letter-spacing: 0.025em;
+    }
+    
+    /* Loading state */
+    .img-loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #b85c38;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 1;
+    }
+    
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    /* Modal overlay */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: rgba(40, 40, 40, 0.6);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), backdrop-filter 0.3s ease;
+      padding: var(--spacing-base);
+      box-sizing: border-box;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: none;
+      border: none;
+      box-shadow: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 250px;
+      min-height: 250px;
+      max-width: calc(100vw - calc(var(--spacing-base) * 2));
+      max-height: calc(100vh - calc(var(--spacing-base) * 2));
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(0.9);
+    }
+    
+    .modal.active .modal-content {
+      transform: scale(1);
+    }
+    
+    .modal .img-card {
+      width: min(450px, 85vw);
+      max-width: 85vw;
+      aspect-ratio: 1/1;
+      margin: 0;
+      z-index: 1001;
+      cursor: pointer;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .know-more-btn {
+      background: white;
+      color: black;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-family: 'Montserrat', Arial, sans-serif;
+      letter-spacing: 0.25px;
+    }
+    
+    .know-more-btn:hover {
+      background: #f5f5f5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .know-more-btn:active {
+      transform: translateY(0);
+    }
+    
+    .know-more-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    /* Responsive modal */
+    @media (max-width: 480px) {
+      .modal .img-card {
+        width: min(320px, 90vw);
+        max-width: 90vw;
+      }
+      .modal {
+        padding: var(--spacing-base);
+      }
+      .modal-content {
+        max-width: calc(100vw - calc(var(--spacing-base) * 2));
+        max-height: calc(100vh - calc(var(--spacing-base) * 2));
+      }
+      .know-more-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+      .modal-wrapper {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Profile Modal -->
+  <div class="profile-modal" id="profileModal">
+    <div class="profile-card">
+      <div class="profile-header">
+        <img src="./assets/logo/female.png" alt="Profile" class="profile-icon-small">
+      </div>
+      <div class="profile-content">
+        <h2>Helloooo!!</h2>
+        <p>I'm so excited to share my work with you guys, im a food stylist/ tablescape artist/ art director/ hand model all rolled into one.</p>
+        <p><strong>Eat with your eyes and enjoy!</strong></p>
+        <p>worked with some of my dream projects ......</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-wrapper">
+    <!-- Profile Icon -->
+    <div class="profile-icon" id="profileIcon">
+      <img src="./assets/logo/scorpion.png" alt="Profile" class="profile-icon-img">
+    </div>
+    
+    <div class="container" id="gallery">
+      <!-- Image cards will be injected here -->
+    </div>
+  </div>
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modalContent">
+      <!-- Zoomed image card will be cloned here -->
+    </div>
+  </div>
+  <script type="module">
+    import { images } from './images.js';
+
+    const gallery = document.getElementById('gallery');
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    const profileIcon = document.getElementById('profileIcon');
+    const profileModal = document.getElementById('profileModal');
+
+    // Function to get dominant color from image
+    function getDominantColor(img) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = img.naturalWidth || img.width;
+      canvas.height = img.naturalHeight || img.height;
+      
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      
+      const colorCount = {};
+      
+      // Sample every 10th pixel for performance
+      for (let i = 0; i < data.length; i += 40) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        const alpha = data[i + 3];
+        
+        // Skip transparent pixels
+        if (alpha < 125) continue;
+        
+        // Round colors to reduce variations
+        const roundedR = Math.round(r / 10) * 10;
+        const roundedG = Math.round(g / 10) * 10;
+        const roundedB = Math.round(b / 10) * 10;
+        
+        const colorKey = `${roundedR},${roundedG},${roundedB}`;
+        colorCount[colorKey] = (colorCount[colorKey] || 0) + 1;
+      }
+      
+      // Find the most frequent color
+      let maxCount = 0;
+      let dominantColor = '200,200,200'; // fallback
+      
+      for (const color in colorCount) {
+        if (colorCount[color] > maxCount) {
+          maxCount = colorCount[color];
+          dominantColor = color;
+        }
+      }
+      
+      return dominantColor;
+    }
+
+    // Function to create lighter version of color
+    function lightenColor(rgbString, amount = 0.7) {
+      const [r, g, b] = rgbString.split(',').map(Number);
+      
+      const lighterR = Math.min(255, r + (255 - r) * amount);
+      const lighterG = Math.min(255, g + (255 - g) * amount);
+      const lighterB = Math.min(255, b + (255 - b) * amount);
+      
+      return `rgb(${Math.round(lighterR)}, ${Math.round(lighterG)}, ${Math.round(lighterB)})`;
+    }
+
+    // Profile modal functionality
+    profileIcon.addEventListener('click', () => {
+      profileModal.classList.add('active');
+    });
+
+    profileModal.addEventListener('click', (e) => {
+      if (e.target === profileModal) {
+        profileModal.classList.remove('active');
+      }
+    });
+
+    // Render image cards
+    images.forEach((img, idx) => {
+      const card = document.createElement('div');
+      card.className = 'img-card';
+      card.innerHTML = `
+        <div class="img-inner">
+          <div class="img-front">
+            <div class="img-loading"></div>
+            <img src="${img.image_url}" alt="Food image ${idx+1}">
+          </div>
+          <div class="img-back">${img.image_content}</div>
+        </div>
+      `;
+      
+      // Handle image loading
+      const imgElement = card.querySelector('.img-front img');
+      const loadingElement = card.querySelector('.img-loading');
+      
+      imgElement.addEventListener('load', () => {
+        imgElement.classList.add('loaded');
+        loadingElement.style.display = 'none';
+      });
+      
+      imgElement.addEventListener('error', () => {
+        loadingElement.style.display = 'none';
+        imgElement.style.opacity = '0.5';
+      });
+      
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(idx);
+      });
+      gallery.appendChild(card);
+    });
+
+    function openModal(idx) {
+      // Clone the card for modal
+      modalContent.innerHTML = '';
+      
+      // Check if this image is from static folder (images 1, 2, 3)
+      const isStaticImage = images[idx].id === 1 || images[idx].id === 2 || images[idx].id === 3;
+      
+      // Create wrapper for card and button
+      const wrapper = document.createElement('div');
+      wrapper.className = 'modal-wrapper';
+      
+      const card = document.createElement('div');
+      card.className = 'img-card';
+      card.innerHTML = `
+        <div class="img-inner">
+          <div class="img-front">
+            <div class="img-loading"></div>
+            <img src="${images[idx].image_url}" alt="Food image ${idx+1}">
+          </div>
+          <div class="img-back">${images[idx].image_content}</div>
+        </div>
+      `;
+      
+      const img = card.querySelector('.img-front img');
+      const backDiv = card.querySelector('.img-back');
+      const loadingElement = card.querySelector('.img-loading');
+      
+      // Handle image loading in modal
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+        loadingElement.style.display = 'none';
+      });
+      
+      img.addEventListener('error', () => {
+        loadingElement.style.display = 'none';
+        img.style.opacity = '0.5';
+      });
+      
+      // Only add flip functionality and button for non-static images
+      if (!isStaticImage) {
+        // Create know more button
+        const knowMoreBtn = document.createElement('button');
+        knowMoreBtn.className = 'know-more-btn';
+        knowMoreBtn.textContent = 'know more';
+        
+        // Function to handle flip
+        const handleFlip = (e) => {
+          e.stopPropagation();
+          card.classList.toggle('flipped');
+          
+          // If flipping to back, extract dominant color and apply lighter version
+          if (card.classList.contains('flipped')) {
+            // Hide the know more button when flipped
+            knowMoreBtn.classList.add('hidden');
+            
+            if (img.complete) {
+              try {
+                const dominantColor = getDominantColor(img);
+                const lighterColor = lightenColor(dominantColor);
+                backDiv.style.backgroundColor = lighterColor;
+              } catch (error) {
+                console.log('Could not extract color:', error);
+              }
+            } else {
+              img.onload = () => {
+                try {
+                  const dominantColor = getDominantColor(img);
+                  const lighterColor = lightenColor(dominantColor);
+                  backDiv.style.backgroundColor = lighterColor;
+                } catch (error) {
+                  console.log('Could not extract color:', error);
+                }
+              };
+            }
+          } else {
+            // Show the know more button when flipped back
+            knowMoreBtn.classList.remove('hidden');
+            // Reset to original background when flipping back
+            backDiv.style.backgroundColor = '#fffbe6';
+          }
+        };
+        
+        // Add flip functionality to both card and button
+        card.addEventListener('click', handleFlip);
+        knowMoreBtn.addEventListener('click', handleFlip);
+        
+        wrapper.appendChild(card);
+        wrapper.appendChild(knowMoreBtn);
+      } else {
+        // For static images, just add the card without button or flip functionality
+        wrapper.appendChild(card);
+      }
+      
+      modalContent.appendChild(wrapper);
+      modal.classList.add('active');
+    }
+
+    // Close modal on background click
+    modal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      // Remove flip state and reset button visibility
+      const card = modalContent.querySelector('.img-card');
+      const btn = modalContent.querySelector('.know-more-btn');
+      if (card) card.classList.remove('flipped');
+      if (btn) btn.classList.remove('hidden');
+    });
+    // Prevent modal content click from closing
+    modalContent.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  </script>
+</body>
+</html> 
