@@ -3,28 +3,13 @@ function getImageUrl(id) {
   const imagesBaseUrl = './assets/images/';
   const staticBaseUrl = './assets/static/';
   
-  // Since we can't easily check file existence in static context,
-  // we'll use a simple approach - just construct the URL with common extensions
-  // The browser will handle the actual file existence check
-  
-  // You can add specific mappings here if needed, or it will default to jpg
-  const specificExtensions = {
-    1: 'png',
-    2: 'png',
-    3: 'png',
-    7: 'png'
-    // Add more as needed: id: 'extension'
-  };
-  
-  // Use specific extension if defined, otherwise default to jpg
-  const extension = specificExtensions[id] || 'jpg';
-  
-  // Use static folder for images 1, 2, and 3
+  // Use static folder for images 1, 2, and 3 (these are .png files)
   if (id === 1 || id === 2 || id === 3) {
-    return `${staticBaseUrl}${id}.${extension}`;
+    return `${staticBaseUrl}${id}.png`;
   }
   
-  return `${imagesBaseUrl}${id}.${extension}`;
+  // All other images are .jpeg files in the images folder
+  return `${imagesBaseUrl}${id}.jpeg`;
 }
 
 export const images = [
@@ -94,7 +79,7 @@ export const images = [
   }
   // Add more image objects here as needed
   // Format: { id: X, image_content: "Description..." }
-  // The image_url will be automatically generated as ./assets/images/X.{extension}
+  // The image_url will be automatically generated as ./assets/images/X.jpeg or ./assets/static/X.png
 ].map(img => ({
   ...img,
   image_url: getImageUrl(img.id)
