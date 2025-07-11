@@ -73,28 +73,29 @@
     .profile-wrapper {
       position: relative;
       display: flex;
-      align-items: flex-start;
-      gap: 0;
       flex-direction: row;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 400px;
     }
     
     .profile-avatar {
-      width: 70px;
-      height: 70px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #ffffff;
+      border: 4px solid #fff;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      position: relative;
+      position: absolute;
+      top: -40px;
+      left: -40px;
       z-index: 2;
-      margin-right: -25px;
-      margin-top: 15px;
-      flex-shrink: 0;
+      background: #fff;
     }
     
     .profile-card {
       background: #ffffff;
-      padding: 30px 35px 30px 50px;
+      padding: 30px 35px 30px 60px;
       max-width: 400px;
       width: 100%;
       height: auto;
@@ -105,6 +106,7 @@
       font-family: 'Montserrat', Arial, sans-serif;
       border: 1px solid rgba(0, 0, 0, 0.04);
       z-index: 1;
+      margin-top: 40px;
     }
     
     .profile-icon-small {
