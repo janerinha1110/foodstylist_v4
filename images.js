@@ -3,9 +3,12 @@ function getImageUrl(id) {
   const imagesBaseUrl = './assets/images/';
   const staticBaseUrl = './assets/static/';
   
-  // Use static folder for images 1, 2, 3, 4, and 12 (these are .png files)
-  if (id === 1 || id === 2 || id === 3 || id === 4 || id === 12) {
-    return `${staticBaseUrl}${id}.png`;
+  // Special mapping for positions that use static folder
+  if (id === 4) {
+    return `${staticBaseUrl}1.png`; // Position 4 uses static image 1
+  }
+  if (id === 12) {
+    return `${staticBaseUrl}2.png`; // Position 12 uses static image 2
   }
   
   // All other images are .jpeg files in the images folder
