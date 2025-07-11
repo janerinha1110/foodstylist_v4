@@ -71,37 +71,35 @@
     }
     
     .profile-card {
-      background: #faf7f2;
-      padding: 40px;
-      max-width: 250px;
-      width: 100%;
+      background: #ffffff;
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
       height: auto;
-      min-height: 350px;
+      min-height: 200px;
       position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      font-family: 'Jacques Francois', serif;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      font-family: 'Montserrat', Arial, sans-serif;
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     .profile-header {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      margin-bottom: 30px;
+      justify-content: flex-start;
+      margin-bottom: 20px;
     }
     
     .profile-avatar {
-      width: 50px;
-      height: 50px;
-      background: #8b5cf6;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      margin-right: 15px;
+      object-fit: cover;
+      margin-right: 0;
+      border: 3px solid #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     
     .profile-icon-small {
@@ -112,24 +110,43 @@
     
     .profile-content {
       text-align: left;
-      line-height: 100%;
-      color: #34495e;
-      font-size: 12px;
-      font-family: 'Jacques Francois', serif;
+      line-height: 1.6;
+      color: #333;
+      font-size: 14px;
+      font-family: 'Montserrat', Arial, sans-serif;
       font-weight: 400;
-      font-style: normal;
-      letter-spacing: 0%;
     }
     
     .profile-content h2 {
-      font-size: 20px;
-      color: #2c3e50;
-      margin-bottom: 15px;
+      font-size: 24px;
+      color: #8B4513;
+      margin-bottom: 20px;
       font-family: 'Jacques Francois', serif;
       font-weight: 400;
-      font-style: normal;
-      line-height: 100%;
-      letter-spacing: 0%;
+      text-align: center;
+      line-height: 1.2;
+    }
+    
+    .profile-content p {
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    
+    .profile-content .story-section {
+      font-style: italic;
+      color: #666;
+      background: #f8f6f0;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border-left: 4px solid #8B4513;
+    }
+    
+    .profile-content .closing {
+      font-weight: 600;
+      color: #333;
+      text-align: center;
+      margin-top: 20px;
     }
     
 
@@ -177,28 +194,22 @@
         height: 50px;
       }
       .profile-card {
-        width: 230px;
-        max-width: 230px;
+        width: 85%;
+        max-width: 350px;
         height: auto;
-        min-height: 250px;
-        padding: 20px 15px;
+        min-height: 200px;
+        padding: 25px 20px;
       }
       .profile-content {
-        font-size: 12px;
-        font-family: 'Jacques Francois', serif;
-        font-weight: 400;
-        font-style: normal;
-        line-height: 100%;
-        letter-spacing: 0%;
+        font-size: 13px;
       }
       .profile-content h2 {
-        font-size: 16px;
-        margin-bottom: 10px;
-        font-family: 'Jacques Francois', serif;
-        font-weight: 400;
-        font-style: normal;
-        line-height: 100%;
-        letter-spacing: 0%;
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+      .profile-avatar {
+        width: 50px;
+        height: 50px;
       }
       .profile-icon-small {
         width: 25px;
@@ -222,28 +233,22 @@
         height: 50px;
       }
       .profile-card {
-        max-width: 320px;
+        max-width: 380px;
         width: 85%;
         height: auto;
         min-height: 200px;
-        padding: 30px 20px;
+        padding: 30px 25px;
       }
       .profile-content {
-        font-size: 12px;
-        font-family: 'Jacques Francois', serif;
-        font-weight: 400;
-        font-style: normal;
-        line-height: 100%;
-        letter-spacing: 0%;
+        font-size: 14px;
       }
       .profile-content h2 {
-        font-size: 18px;
-        margin-bottom: 12px;
-        font-family: 'Jacques Francois', serif;
-        font-weight: 400;
-        font-style: normal;
-        line-height: 100%;
-        letter-spacing: 0%;
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+      .profile-avatar {
+        width: 55px;
+        height: 55px;
       }
       .profile-icon-small {
         width: 30px;
@@ -506,17 +511,19 @@
   <div class="profile-modal" id="profileModal">
     <div class="profile-card">
       <div class="profile-header">
-        <img src="./assets/logo/female.png" alt="Profile" class="profile-icon-small">
+        <img src="./assets/images/1.jpg" alt="Profile" class="profile-avatar">
       </div>
       <div class="profile-content">
-        <h2><center>Helloooooo!!</center></h2>
+        <h2>Helloooooo!!</h2>
         <p>I'm a food stylist, table scape artist, art director, hand model all rolled into one.</p>
         <p>I'm so excited to share my work with the world, I'd love to know your thoughts and feedback, cause what are we here for if not to evolve and grow.</p>
-        <p>A little story about me - I've grown up watching Masterchef Australia and that's where I first fell in love with food plating and quenelles, who knew it would get me here.</p>
+        <div class="story-section">
+          A little story about me - I've grown up watching Masterchef Australia and that's where I first fell in love with food plating and quenelles, who knew it would get me here?
+        </div>
         <p>I've had the privilege to work with an amazing company Lost and hungry studios and esteemed clients like Chrome hospitality, Borosil, Tata, Oberoi - Cou cou, Entisi, Foodhall, Bastian, Armani cafe, Amadeo, Nmacc, Yautcha, Hakkasan, Masala library and many more.</p>
         <p>The person I've evolved to be as a creative I owe it to all of the people above and more.</p>
         <p>There's always more to come, see and be,</p>
-        <p><strong>till then eat with your eyes and enjoy!</strong></p>
+        <div class="closing">Till then, eat with your eyes and enjoy!</div>
       </div>
     </div>
   </div>
