@@ -72,33 +72,35 @@
     
     .profile-wrapper {
       position: relative;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
+      display: block;
       width: 100%;
-      max-width: 400px;
+      max-width: 340px;
     }
     
     .profile-avatar {
-      width: 80px;
-      height: 80px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #fff;
+      border: 3px solid #fff;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       position: absolute;
-      top: -40px;
-      left: -40px;
+      top: -12px;
+      left: -12px;
       z-index: 2;
       background: #fff;
     }
     
     .profile-card {
       background: #ffffff;
-      padding: 30px 35px 30px 60px;
-      max-width: 400px;
+      padding: 68px 20px 20px 20px;
+      max-width: 340px;
       width: 100%;
       height: auto;
+      max-height: 80vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
       position: relative;
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
@@ -106,7 +108,7 @@
       font-family: 'Montserrat', Arial, sans-serif;
       border: 1px solid rgba(0, 0, 0, 0.04);
       z-index: 1;
-      margin-top: 40px;
+      margin-top: 0;
     }
     
     .profile-icon-small {
@@ -119,13 +121,56 @@
       text-align: left;
       line-height: 1.6;
       color: #4a4a4a;
-      font-size: 12px;
+      font-size: 13px;
       font-family: 'Montserrat', Arial, sans-serif;
       font-weight: 400;
+      flex: 1 1 auto;
+      overflow-y: auto;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+      position: relative;
+    }
+    
+    .profile-content::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .scroll-hint {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 44px;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 60%, #fff 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 10;
+      transition: opacity 0.3s;
+    }
+    
+    .scroll-hint-arrow {
+      font-size: 26px;
+      color: #888;
+      margin-bottom: 18px;
+      opacity: 0.95;
+      font-weight: bold;
+      animation: bounceDown 1.2s infinite;
+    }
+    
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+    
+    .scroll-hint.hide {
+      opacity: 0;
+      pointer-events: none;
     }
     
     .profile-content h2 {
-      font-size: 20px;
+      font-size: 18px;
       color: #8B4513;
       margin-bottom: 20px;
       font-family: 'Jacques Francois', serif;
@@ -220,50 +265,18 @@
         height: 50px;
       }
       .profile-wrapper {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 0;
-      }
-      .profile-avatar {
-        width: 60px;
-        height: 60px;
-        margin-right: -20px;
-        margin-top: 10px;
+        max-width: 96vw;
       }
       .profile-card {
-        width: 90%;
-        max-width: 350px;
-        height: auto;
-        padding: 25px 30px;
+        padding: 18px 4vw 8px 4vw;
+        max-width: 98vw;
+        max-height: 70vw;
       }
-      .profile-content {
-        font-size: 11px;
-      }
-      .profile-content h2 {
-        font-size: 18px;
-        margin-bottom: 15px;
-      }
-      .profile-content .story-section {
-        font-size: 11px;
-        padding: 12px;
-        margin: 15px 0;
-      }
-      .profile-content p {
-        margin-bottom: 12px;
-      }
-      .profile-content .closing {
-        font-size: 11px;
-        margin-top: 15px;
-        padding-top: 12px;
-      }
-      .profile-content .contact-info {
-        font-size: 11px;
-        margin-top: 12px;
-        padding: 10px 14px;
-      }
-      .profile-icon-small {
-        width: 25px;
-        height: 25px;
+      .profile-avatar {
+        width: 32px;
+        height: 32px;
+        top: -8px;
+        left: -8px;
       }
     }
     
@@ -283,12 +296,17 @@
         height: 50px;
       }
       .profile-wrapper {
-        gap: 0;
+        max-width: 95vw;
+      }
+      .profile-card {
+        padding: 32px 12px 16px 12px;
+        max-width: 98vw;
       }
       .profile-avatar {
-        width: 65px;
-        height: 65px;
-        margin-right: -22px;
+        width: 56px;
+        height: 56px;
+        top: -10px;
+        left: -10px;
       }
       .profile-card {
         max-width: 380px;
@@ -575,6 +593,73 @@
         gap: 12px;
       }
     }
+    @media (max-width: 768px) {
+      .profile-wrapper {
+        max-width: 95vw;
+      }
+      .profile-card {
+        padding: 60px 10px 16px 10px;
+        max-width: 95vw;
+      }
+      .profile-avatar {
+        width: 48px;
+        height: 48px;
+        top: -10px;
+        left: -10px;
+        border-width: 2px;
+      }
+      .profile-content h2 {
+        font-size: 16px;
+      }
+      .profile-content {
+        font-size: 12px;
+      }
+    }
+    @media (max-width: 480px) {
+      .profile-wrapper {
+        max-width: 85vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .profile-card {
+        padding: 48px 2vw 8px 2vw;
+        max-width: 85vw;
+        max-height: 80vh;
+        margin-left: -8px;
+        margin-right: auto;
+      }
+      .profile-avatar {
+        width: 36px;
+        height: 36px;
+        top: -8px;
+        left: -16px;
+        border-width: 2px;
+      }
+      .profile-content h2 {
+        font-size: 13px;
+      }
+      .profile-content {
+        font-size: 10px;
+      }
+    }
+    @media (max-width: 768px) and (min-width: 481px) {
+      .profile-card {
+        margin-left: 10px;
+        margin-right: auto;
+      }
+      .profile-avatar {
+        left: -10px;
+      }
+    }
+    @media (min-width: 769px) {
+      .profile-card {
+        margin-left: 12px;
+        margin-right: auto;
+      }
+      .profile-avatar {
+        left: -12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -595,6 +680,9 @@
           <p>There's always more to come, see and be,</p>
           <div class="closing">Till then, eat with your eyes and enjoy!</div>
           <div class="contact-info">Contact me: 9769549605</div>
+        </div>
+        <div class="scroll-hint" id="profileScrollHint">
+          <span class="scroll-hint-arrow">&#8595;</span>
         </div>
       </div>
     </div>
@@ -686,11 +774,34 @@
     // Profile modal functionality
     profileIcon.addEventListener('click', () => {
       profileModal.classList.add('active');
+      // Show/hide scroll hint
+      setTimeout(() => updateProfileScrollHint(), 100);
     });
 
     profileModal.addEventListener('click', (e) => {
       if (e.target === profileModal) {
         profileModal.classList.remove('active');
+      }
+    });
+
+    // Scroll hint logic
+    function updateProfileScrollHint() {
+      const content = document.querySelector('.profile-content');
+      const hint = document.getElementById('profileScrollHint');
+      if (!content || !hint) return;
+      if (content.scrollHeight > content.clientHeight + 2) {
+        hint.classList.remove('hide');
+      } else {
+        hint.classList.add('hide');
+      }
+    }
+    // Hide scroll hint when scrolled to bottom
+    document.querySelector('.profile-content').addEventListener('scroll', function() {
+      const hint = document.getElementById('profileScrollHint');
+      if (this.scrollTop + this.clientHeight >= this.scrollHeight - 2) {
+        hint.classList.add('hide');
+      } else {
+        hint.classList.remove('hide');
       }
     });
 
@@ -732,14 +843,11 @@
     function openModal(idx) {
       // Clone the card for modal
       modalContent.innerHTML = '';
-      
-      // Check if this image is from static folder (only images 4, 12)
-      const isStaticImage = images[idx].id === 4 || images[idx].id === 12;
-      
+
       // Create wrapper for card and button
       const wrapper = document.createElement('div');
       wrapper.className = 'modal-wrapper';
-      
+
       const card = document.createElement('div');
       card.className = 'img-card';
       card.innerHTML = `
@@ -751,40 +859,47 @@
           <div class="img-back">${images[idx].image_content}</div>
         </div>
       `;
-      
+
       const img = card.querySelector('.img-front img');
       const backDiv = card.querySelector('.img-back');
       const loadingElement = card.querySelector('.img-loading');
-      
+
       // Handle image loading in modal
       img.addEventListener('load', () => {
         img.classList.add('loaded');
         loadingElement.style.display = 'none';
       });
-      
+
       img.addEventListener('error', () => {
         loadingElement.style.display = 'none';
         img.style.opacity = '0.5';
       });
-      
-      // Only add flip functionality and button for non-static images
-      if (!isStaticImage) {
-        // Create know more button
-        const knowMoreBtn = document.createElement('button');
-        knowMoreBtn.className = 'know-more-btn';
-        knowMoreBtn.textContent = 'know more';
-        
-        // Function to handle flip
-        const handleFlip = (e) => {
-          e.stopPropagation();
-          card.classList.toggle('flipped');
-          
-          // If flipping to back, extract dominant color and apply lighter version
-          if (card.classList.contains('flipped')) {
-            // Hide the know more button when flipped
-            knowMoreBtn.classList.add('hidden');
-            
-            if (img.complete) {
+
+      // Create know more button for all images
+      const knowMoreBtn = document.createElement('button');
+      knowMoreBtn.className = 'know-more-btn';
+      knowMoreBtn.textContent = 'know more';
+
+      // Function to handle flip
+      const handleFlip = (e) => {
+        e.stopPropagation();
+        card.classList.toggle('flipped');
+
+        // If flipping to back, extract dominant color and apply lighter version
+        if (card.classList.contains('flipped')) {
+          // Hide the know more button when flipped
+          knowMoreBtn.classList.add('hidden');
+
+          if (img.complete) {
+            try {
+              const dominantColor = getDominantColor(img);
+              const lighterColor = lightenColor(dominantColor);
+              backDiv.style.backgroundColor = lighterColor;
+            } catch (error) {
+              console.log('Could not extract color:', error);
+            }
+          } else {
+            img.onload = () => {
               try {
                 const dominantColor = getDominantColor(img);
                 const lighterColor = lightenColor(dominantColor);
@@ -792,36 +907,23 @@
               } catch (error) {
                 console.log('Could not extract color:', error);
               }
-            } else {
-              img.onload = () => {
-                try {
-                  const dominantColor = getDominantColor(img);
-                  const lighterColor = lightenColor(dominantColor);
-                  backDiv.style.backgroundColor = lighterColor;
-                } catch (error) {
-                  console.log('Could not extract color:', error);
-                }
-              };
-            }
-          } else {
-            // Show the know more button when flipped back
-            knowMoreBtn.classList.remove('hidden');
-            // Reset to original background when flipping back
-            backDiv.style.backgroundColor = '#fffbe6';
+            };
           }
-        };
-        
-        // Add flip functionality to both card and button
-        card.addEventListener('click', handleFlip);
-        knowMoreBtn.addEventListener('click', handleFlip);
-        
-        wrapper.appendChild(card);
-        wrapper.appendChild(knowMoreBtn);
-      } else {
-        // For static images, just add the card without button or flip functionality
-        wrapper.appendChild(card);
-      }
-      
+        } else {
+          // Show the know more button when flipping back
+          knowMoreBtn.classList.remove('hidden');
+          // Reset to original background when flipping back
+          backDiv.style.backgroundColor = '#fffbe6';
+        }
+      };
+
+      // Add flip functionality to both card and button
+      card.addEventListener('click', handleFlip);
+      knowMoreBtn.addEventListener('click', handleFlip);
+
+      wrapper.appendChild(card);
+      wrapper.appendChild(knowMoreBtn);
+
       modalContent.appendChild(wrapper);
       modal.classList.add('active');
     }
