@@ -12,75 +12,12 @@ function getImageUrl(id) {
   return `${imagesBaseUrl}${id}.jpeg`;
 }
 
-export const images = [
-  {
-    id: 4,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 5,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 6,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 1,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 7,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 8,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 9,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 10,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 11,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 4,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 5,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 2,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 6,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 7,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 8,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  },
-  {
-    id: 3,
-    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah."
-  }
-  // Add more image objects here as needed
-  // Format: { id: X, image_content: "Description..." }
-  // The image_url will be automatically generated as ./assets/images/X.jpeg or ./assets/static/X.png
-].map(img => ({
-  ...img,
-  image_url: getImageUrl(img.id)
-})); 
+// Generate array for all 36 images
+export const images = Array.from({length: 36}, (_, index) => {
+  const id = index + 1;
+  return {
+    id: id,
+    image_content: "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah.",
+    image_url: getImageUrl(id)
+  };
+}); 
