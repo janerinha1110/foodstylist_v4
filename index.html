@@ -23,11 +23,11 @@
     
     /* Profile Icon */
     .profile-icon {
-      position: absolute;
+      position: fixed;
       top: var(--spacing-base);
-      right: var(--spacing-base);
-      width: 60px;
-      height: 60px;
+      right: calc(50% - 600px + var(--spacing-base));
+      width: 50px;
+      height: 50px;
       cursor: pointer;
       z-index: 999;
       display: flex;
@@ -44,8 +44,8 @@
 
     
     .profile-icon-img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       object-fit: contain;
     }
     
@@ -243,6 +243,18 @@
     }
     
     /* Responsive breakpoints for better control */
+    @media (max-width: 1200px) {
+      .profile-icon {
+        right: var(--spacing-base);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .profile-icon {
+        right: calc(50vw - 600px + var(--spacing-base));
+      }
+    }
+    
     @media (max-width: 480px) {
       .gallery-wrapper {
         padding: 0;
@@ -351,14 +363,14 @@
         gap: var(--spacing-base);
       }
       .profile-icon {
-        width: 55px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
         top: var(--spacing-base);
         right: var(--spacing-base);
       }
       .profile-icon-img {
-        width: 55px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
       }
     }
     
@@ -368,14 +380,14 @@
         gap: var(--spacing-base);
       }
       .profile-icon {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         top: var(--spacing-base);
         right: var(--spacing-base);
       }
       .profile-icon-img {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
       }
     }
     
@@ -385,14 +397,14 @@
         gap: var(--spacing-base);
       }
       .profile-icon {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         top: var(--spacing-base);
         right: var(--spacing-base);
       }
       .profile-icon-img {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
       }
     }
     
@@ -528,7 +540,7 @@
     .modal .img-card {
       width: min(450px, 85vw);
       max-width: 85vw;
-      aspect-ratio: 1/1;
+      aspect-ratio: 3/4;
       margin: 0;
       z-index: 1001;
       cursor: pointer;
@@ -675,6 +687,16 @@
     .profile-modal-close:hover {
       color: #c00;
     }
+          .img-special-contain {
+        object-fit: cover !important;
+        background: transparent !important;
+      }
+      
+      /* Special styling for 4.png in modal to prevent cropping */
+      .modal .img-special-contain {
+        object-fit: contain !important;
+        background: #fff !important;
+      }
   </style>
 </head>
 <body>
@@ -835,7 +857,7 @@
         <div class="img-inner">
           <div class="img-front">
             <div class="img-loading"></div>
-            <img src="${img.image_url}" alt="Food image ${idx+1}">
+            <img src="${img.image_url}" alt="Food image ${idx+1}"${img.image_url === './assets/images/4.png' ? ' class="img-special-contain"' : ''}>
           </div>
           <div class="img-back">${img.image_content}</div>
         </div>
@@ -855,10 +877,18 @@
         imgElement.style.opacity = '0.5';
       });
       
-      card.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openModal(idx);
-      });
+      // Special behavior for 4.png: open modal as usual, do not hide the card
+      if (img.image_url === './assets/images/4.png') {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(idx);
+        });
+      } else {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(idx);
+        });
+      }
       gallery.appendChild(card);
     });
 
@@ -876,7 +906,7 @@
         <div class="img-inner">
           <div class="img-front">
             <div class="img-loading"></div>
-            <img src="${images[idx].image_url}" alt="Food image ${idx+1}">
+            <img src="${images[idx].image_url}" alt="Food image ${idx+1}"${images[idx].image_url === './assets/images/4.png' ? ' class="img-special-contain"' : ''}>
           </div>
           <div class="img-back">${images[idx].image_content}</div>
         </div>
@@ -906,6 +936,13 @@
       const handleFlip = (e) => {
         e.stopPropagation();
         card.classList.toggle('flipped');
+
+        // If this is the image with image_url './assets/images/4.png', close the zoomed-in modal and show the profile modal
+        if (images[idx].image_url === './assets/images/4.png') {
+          modal.classList.remove('active');
+          profileModal.classList.add('active');
+          setTimeout(() => updateProfileScrollHint(), 100);
+        }
 
         // If flipping to back, extract dominant color and apply lighter version
         if (card.classList.contains('flipped')) {

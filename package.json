@@ -1,0 +1,17 @@
+{
+  "name": "food-stylist",
+  "version": "1.0.0",
+  "description": "Food Stylist Portfolio Landing Page",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 3000 -o",
+    "dev": "npx http-server -p 3000 -o -c-1",
+    "serve": "npx serve -s . -p 3000"
+  },
+  "keywords": ["food", "stylist", "portfolio", "landing-page"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 
