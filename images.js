@@ -1,17 +1,53 @@
-// Function to dynamically find image based on id
+// Function to automatically map images based on available files
 function getImageUrl(id) {
   const imagesBaseUrl = './assets/images/';
-  const staticBaseUrl = './assets/static/';
   
-  // Special mapping for positions that use static folder
-  if (id === 4) {
-    return `${staticBaseUrl}1.png`; // Position 4 uses static image 1
-  }
-  if (id === 12) {
-    return `${staticBaseUrl}2.png`; // Position 12 uses static image 2
+  // Available files in the images folder (based on current directory listing)
+  const availableFiles = {
+    1: '1.jpeg',
+    2: '2.jpeg', 
+    3: '3.jpeg',
+    4: '4.png',
+    5: '5.jpeg',
+    6: '6.jpeg',
+    7: '7.jpeg',
+    8: '8.jpeg',
+    9: '9.jpeg',
+    10: '10.jpeg',
+    11: '11.jpeg',
+    12: '12.png',
+    13: '13.jpeg',
+    14: '14.jpeg',
+    15: '15.jpeg',
+    16: '16.jpeg',
+    17: '17.jpeg',
+    18: '18.jpeg',
+    19: '19.jpeg',
+    20: '20.jpeg',
+    21: '21.jpeg',
+    22: '22.jpeg',
+    23: '23.jpeg',
+    24: '24.jpeg',
+    25: '25.jpeg',
+    26: '26.jpeg',
+    27: '27.jpeg',
+    28: '28.jpeg',
+    29: '29.jpeg',
+    30: '30.jpeg',
+    31: '31.jpeg',
+    32: '32.jpeg',
+    33: '33.jpeg',
+    34: '34.jpeg',
+    35: '35.jpeg',
+    36: '36.jpeg'
+  };
+  
+  const fileName = availableFiles[id];
+  if (fileName) {
+    return `${imagesBaseUrl}${fileName}`;
   }
   
-  // All other images are .jpeg files in the images folder
+  // Fallback for missing files
   return `${imagesBaseUrl}${id}.jpeg`;
 }
 
