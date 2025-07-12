@@ -1,11 +1,11 @@
-// Function to automatically map images based on available files
-function getImageUrl(id) {
+// Function to get image URL based on position number
+function getImageUrl(position) {
   const imagesBaseUrl = './assets/images/';
   
-  // Available files in the images folder (based on current directory listing)
+  // Available files in the images folder (based on actual files)
   const availableFiles = {
     1: '1.jpeg',
-    2: '2.jpeg', 
+    2: '2.jpeg',
     3: '3.jpeg',
     4: '4.png',
     5: '5.jpeg',
@@ -20,7 +20,7 @@ function getImageUrl(id) {
     14: '14.jpeg',
     15: '15.jpeg',
     16: '16.jpeg',
-    17: '17.jpeg',
+    17: '17.png',
     18: '18.jpeg',
     19: '19.jpeg',
     20: '20.jpeg',
@@ -42,16 +42,56 @@ function getImageUrl(id) {
     36: '36.jpeg'
   };
   
-  const fileName = availableFiles[id];
+  const fileName = availableFiles[position];
   if (fileName) {
     return `${imagesBaseUrl}${fileName}`;
   }
   
   // Fallback for missing files
-  return `${imagesBaseUrl}${id}.jpeg`;
+  return `${imagesBaseUrl}placeholder.png`;
 }
 
-// Content for each image
+const imagesBaseUrl = './assets/images/';
+
+const availableFiles = {
+  1: '1.jpeg',
+  2: '2.jpeg',
+  3: '3.jpeg',
+  4: '4.png',
+  5: '5.jpeg',
+  6: '6.jpeg',
+  7: '7.jpeg',
+  8: '8.jpeg',
+  9: '9.jpeg',
+  10: '10.jpeg',
+  11: '11.jpeg',
+  12: '12.png',
+  13: '13.jpeg',
+  14: '14.jpeg',
+  15: '15.jpeg',
+  16: '16.jpeg',
+  17: '17.png',
+  18: '18.jpeg',
+  19: '19.jpeg',
+  20: '20.jpeg',
+  21: '21.jpeg',
+  22: '22.jpeg',
+  23: '23.jpeg',
+  24: '24.jpeg',
+  25: '25.jpeg',
+  26: '26.jpeg',
+  27: '27.jpeg',
+  28: '28.jpeg',
+  29: '29.jpeg',
+  30: '30.jpeg',
+  31: '31.jpeg',
+  32: '32.jpeg',
+  33: '33.jpeg',
+  34: '34.jpeg',
+  35: '35.jpeg',
+  36: '36.jpeg'
+};
+
 const imageContents = {
   1: "Work for a restaurant called Lyla it's Mexican but its real roots are glamour and fun and that's the direction we went in for this group drinks shot",
   2: "A clean top shot for a clean brand Amadeo, where I was mainly playing with the colours of the tuna, menu and drink",
@@ -91,12 +131,11 @@ const imageContents = {
   36: "Nmacc knows what a real cheese platter looks like we tried to do it justice by keeping it minimal and clean."
 };
 
-// Generate array for all 36 images
-export const images = Array.from({length: 36}, (_, index) => {
-  const id = index + 1;
+export const images = Array.from({ length: 36 }, (_, index) => {
+  const position = index + 1;
   return {
-    id: id,
-    image_content: imageContents[id] || "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah.",
-    image_url: getImageUrl(id)
+    id: position,
+    image_content: imageContents[position] || "This was a cocktail oriented shoot featuring indigenous ingredients for the restaurant blah.",
+    image_url: availableFiles[position] ? imagesBaseUrl + availableFiles[position] : imagesBaseUrl + 'placeholder.png'
   };
 }); 
