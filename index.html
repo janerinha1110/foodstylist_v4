@@ -660,12 +660,28 @@
         left: -12px;
       }
     }
+    .profile-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #888;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s;
+    }
+    .profile-modal-close:hover {
+      color: #c00;
+    }
   </style>
 </head>
 <body>
   <!-- Profile Modal -->
   <div class="profile-modal" id="profileModal">
     <div class="profile-wrapper">
+      <button class="profile-modal-close" id="profileModalClose" aria-label="Close profile modal">&times;</button>
       <img src="./assets/logo/logo.png" alt="Profile" class="profile-avatar">
       <div class="profile-card">
         <div class="profile-content">
@@ -711,6 +727,7 @@
     const modalContent = document.getElementById('modalContent');
     const profileIcon = document.getElementById('profileIcon');
     const profileModal = document.getElementById('profileModal');
+    const profileModalClose = document.getElementById('profileModalClose');
 
     // Function to get dominant color from image
     function getDominantColor(img) {
@@ -782,6 +799,11 @@
       if (e.target === profileModal) {
         profileModal.classList.remove('active');
       }
+    });
+
+    profileModalClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      profileModal.classList.remove('active');
     });
 
     // Scroll hint logic
