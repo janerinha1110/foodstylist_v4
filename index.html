@@ -948,11 +948,12 @@
         imgElement.style.opacity = '0.5';
       });
       
-      // Special behavior for 4.png: open modal as usual, do not hide the card
+      // Special behavior for 4.png: open profile modal directly
       if (img.image_url === './assets/images/4.png') {
         card.addEventListener('click', (e) => {
           e.stopPropagation();
-          openModal(idx);
+          profileModal.classList.add('active');
+          setTimeout(() => updateProfileScrollHint(), 100);
         });
       } else {
         card.addEventListener('click', (e) => {
